@@ -1,5 +1,6 @@
 import React from "react";
 import { useInput } from "../../hooks/useInput";
+import { useNavigate } from "react-router-dom";
 
 /**
   * 세션스토리지 만들기
@@ -17,7 +18,22 @@ import { useInput } from "../../hooks/useInput";
  */
 
 const SignIn = () => {
-  const [id, password, onChangeId, onChangePw, onSubmit] = useInput("");
+  const navigate = useNavigate();
+
+  const [value, setValue, onChange] = useInput("");
+  const [valuePw, setValuePw, onChangePw] = useInput("");
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    const signInTime = Date.now();
+    sessionStorage.setItem("userId", value);
+    sessionStorage.setItem("accessTime", signInTime);
+    sessionStorage.setItem("expirationTime", Date.now() + 30 * 60 * 1000);
+    setValue("");
+    setValuePw("");
+
+    navigate("/");
+  };
 
   return (
     <div className="sign-in">
@@ -25,14 +41,14 @@ const SignIn = () => {
       <form onSubmit={onSubmit}>
         <div className="input-box">
           <label htmlFor="id">ID</label>
-          <input type="text" id="id" value={id} onChange={onChangeId} />
+          <input type="text" id="id" value={value} onChange={onChange} />
         </div>
         <div className="input-box">
           <label htmlFor="pw">PW</label>
           <input
             type="password"
             id="pw"
-            value={password}
+            value={valuePw}
             onChange={onChangePw}
           />
         </div>
