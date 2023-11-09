@@ -17,21 +17,26 @@ import { useInput } from "../../hooks/useInput";
  */
 
 const SignIn = () => {
-  const [id, password, onChangeId, onChangePw] = useInput("");
+  const [id, password, onChangeId, onChangePw, onSubmit] = useInput("");
 
   return (
-    <div>
-      <h1>Sign In</h1>
-      <form>
-        <div>
-          <span>ID</span>
-          <input type="text" value={id} onChange={onChangeId} />
+    <div className="sign-in">
+      <h1 className="title">Sign In</h1>
+      <form onSubmit={onSubmit}>
+        <div className="input-box">
+          <label htmlFor="id">ID</label>
+          <input type="text" id="id" value={id} onChange={onChangeId} />
         </div>
-        <div>
-          <span>PW</span>
-          <input type="password" value={password} onChange={onChangePw} />
+        <div className="input-box">
+          <label htmlFor="pw">PW</label>
+          <input
+            type="password"
+            id="pw"
+            value={password}
+            onChange={onChangePw}
+          />
         </div>
-        <button>로그인</button>
+        <button className="btn-sign-in">로그인</button>
       </form>
     </div>
   );
