@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useInput } from "../../hooks/useInput";
 import { useNavigate } from "react-router-dom";
 
@@ -22,6 +22,7 @@ const SignIn = () => {
 
   const [value, setValue, onChange] = useInput("");
   const [valuePw, setValuePw, onChangePw] = useInput("");
+  const [isLogin, setIsLogin] = useState(false);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -32,7 +33,8 @@ const SignIn = () => {
     setValue("");
     setValuePw("");
 
-    navigate("/");
+    navigate("/", { state: { isLogin: true } });
+    setIsLogin(true);
   };
 
   return (
