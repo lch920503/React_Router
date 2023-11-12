@@ -62,3 +62,10 @@ button {
   background-color: #efefef;
   border-radius: 3px;
 }
+.btn-reset-time {
+  margin-left: 7px;
+  padding: 3px 6px;
+  border: 1px solid #efefef;
+  border-radius: 3px;
+  background-color: #efefef;
+}
