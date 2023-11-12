@@ -1,42 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-/**
- * 내가 할 일
- * 1. 초를 카운트하기
- * 2. 60초를 카운트하면 분을 줄이기
- */
-
-const currentTime = sessionStorage.getItem("expirationTime");
-let secondsInterval;
-
 const Header = () => {
   const { state } = useLocation();
 
-  const time = new Date(parseInt(currentTime));
-  let [signInMinutes, setSignInMinutes] = useState(time.getMinutes());
-  let [signInSeconds, setSignInSeconds] = useState(time.getSeconds());
+  const [minutes, setMinutes] = useState();
+  const [seconds, setSeconds] = useState();
 
-  const secondsCountdown = () => {
-    if (signInSeconds >= 0) {
-      setSignInSeconds(signInSeconds--);
-    } else {
-      clearInterval(secondsInterval);
-    }
+  const expirationTimeCount = () => {
+    let currentTime = new Date();
+    let expirationTime = new Date(
+      parseInt(sessionStorage.getItem("expirationTime"))
+    );
+    let remainTime = expirationTime.getTime() - currentTime.getTime();
+    const remainMinutes = Math.floor(remainTime / (1000 * 60));
+    const remainSeconds = Math.floor(remainTime / 1000);
+    setMinutes(remainMinutes);
+    setSeconds(remainSeconds - remainMinutes * 60);
   };
 
   useEffect(() => {
-    secondsInterval = setInterval(() => {
-      secondsCountdown();
-    }, 1000);
-  }, []);
+    setInterval(expirationTimeCount, 1000);
+  }, [minutes, seconds]);
 
   return (
     <header>
       {state?.isLogin && (
         <div>
-          {signInMinutes > 9 ? signInMinutes : `0${signInMinutes}`}분{" "}
-          {signInSeconds > 9 ? signInSeconds : `0${signInSeconds}`}초
+          만료시간&nbsp;:&nbsp;{minutes > 9 ? minutes : `0${minutes}`}분&nbsp;
+          {seconds > 9 ? seconds : `0${seconds}`}초 남았습니다
         </div>
       )}
     </header>

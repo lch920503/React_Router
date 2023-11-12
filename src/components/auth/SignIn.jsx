@@ -33,8 +33,8 @@ const SignIn = () => {
     setValue("");
     setValuePw("");
 
-    navigate("/", { state: { isLogin: true } });
     setIsLogin(true);
+    navigate("/", { state: { isLogin: true } });
   };
 
   return (
