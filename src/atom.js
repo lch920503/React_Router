@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-export const expirationMessege = atom({
-  key: "expirationMessege",
+export const expirationMessegeState = atom({
+  key: "expirationMessegeState",
   default: "",
 });

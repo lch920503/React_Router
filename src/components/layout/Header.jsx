@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useResetButton } from "../../hooks/useResetButton";
 import { useSetRecoilState } from "recoil";
-import { expirationMessege } from "../../atom";
+import { expirationMessegeState } from "../../atom";
 
 let countInterval;
 
@@ -12,7 +12,7 @@ const Header = () => {
 
   const [minutes, setMinutes] = useState(30);
   const [seconds, setSeconds] = useState(0);
-  const setExpirationText = useSetRecoilState(expirationMessege);
+  const setExpirationText = useSetRecoilState(expirationMessegeState);
 
   const expirationTimeCount = () => {
     const currentTime = new Date();
@@ -42,9 +42,9 @@ const Header = () => {
   useEffect(() => {
     countInterval = setInterval(expirationTimeCount, 1000);
 
-    if (minutes === 0 && seconds === 59) {
+    if (minutes <= 0 && seconds === 59) {
       alert("잠시 후 로그아웃됩니다.");
-    } else if (minutes === 0 && seconds === 0) {
+    } else if (minutes <= 0 && seconds === 0) {
       resetSignInfo();
     }
   }, [minutes, seconds]);

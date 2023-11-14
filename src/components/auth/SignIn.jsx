@@ -1,7 +1,7 @@
 import React from "react";
 import { useInput } from "../../hooks/useInput";
 import { useNavigate } from "react-router-dom";
-import { expirationMessege } from "../../atom";
+import { expirationMessegeState } from "../../atom";
 import { useRecoilValue } from "recoil";
 
 /**
@@ -24,7 +24,7 @@ const SignIn = () => {
 
   const [value, setValue, onChange] = useInput("");
   const [valuePw, setValuePw, onChangePw] = useInput("");
-  const expirationText = useRecoilValue(expirationMessege);
+  const expirationText = useRecoilValue(expirationMessegeState);
 
   const onSubmit = (e) => {
     e.preventDefault();
