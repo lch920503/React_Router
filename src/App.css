@@ -69,3 +69,9 @@ button {
   border-radius: 3px;
   background-color: #efefef;
 }
+.expiration-text {
+  margin-top: 12px;
+  font-size: 14px;
+  text-align: center;
+  transform: translateX(35px);
+}

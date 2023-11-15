@@ -36,7 +36,12 @@ const Header = () => {
 
   const handleSignOut = () => {
     const confirm = window.confirm("로그아웃 하시겠습니까?");
-    if (confirm) return resetSignInfo();
+    if (confirm) {
+      sessionStorage.clear();
+      clearInterval(countInterval);
+      navigate("/signIn");
+      setExpirationText("로그아웃 되었습니다");
+    }
   };
 
   useEffect(() => {
