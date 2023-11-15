@@ -2,7 +2,7 @@ import React from "react";
 import { useInput } from "../../hooks/useInput";
 import { useNavigate } from "react-router-dom";
 import { expirationMessegeState } from "../../atom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 
 /**
   * 세션스토리지 만들기
