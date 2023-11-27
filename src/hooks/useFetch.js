@@ -1,5 +1,13 @@
-import React from "react";
+import { useState } from "react";
 
 export const useFetch = () => {
-  return <div>useFetch</div>;
+  const [data, setData] = useState();
+
+  const api = async (url) => {
+    await fetch(`${url}/users`)
+      .then((res) => res.json())
+      .then((data) => setData(data));
+  };
+
+  return { data, api };
 };
