@@ -32,6 +32,9 @@ const Header = () => {
     navigate("/signIn");
     alert("세션이 만료되었습니다");
     setExpirationText("세션이 만료되었습니다");
+    setTimeout(() => {
+      setExpirationText("");
+    }, 3000);
   };
 
   const handleSignOut = () => {
@@ -41,6 +44,9 @@ const Header = () => {
       clearInterval(countInterval);
       navigate("/signIn");
       setExpirationText("로그아웃 되었습니다");
+      setTimeout(() => {
+        setExpirationText("");
+      }, 3000);
     }
   };
 
